@@ -1,0 +1,11 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+    DawBed\UserRegistrationConfirmationBundle\:
+        resource: '%bundle_dir%/*'
+        exclude: '%bundle_dir%/{DependencyInjection,Entity,Migrations,Tests}'
+    DawBed\UserRegistrationConfirmationBundle\EventListener\RegistrationListener:
+        tags:
+            - { name: kernel.event_listener, event: !php/const DawBed\UserRegistrationBundle\Event\Events::REGISTRATION_RESPONSE, priority: 255 }

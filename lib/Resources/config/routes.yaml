@@ -1,0 +1,8 @@
+repeatToken:
+    path: /repeat
+    methods: [POST,OPTIONS]
+    controller: DawBed\UserRegistrationConfirmationBundle\Controller\ConfirmationController::refresh
+
+
+
+

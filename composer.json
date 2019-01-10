@@ -1,0 +1,17 @@
+{
+    "name": "dawid-bednarz/sf-user-registration-confirmation-bundle",
+    "description": "User registration confirmation logic for symfony",
+    "type": "lib",
+    "require": {
+        "php": "^7.2",
+        "dawid-bednarz/sf-user-confirmation-bundle": "@dev",
+        "symfony/swiftmailer-bundle": "^3.2",
+        "dawid-bednarz/sf-user-registration-bundle": "@dev",
+        "dawid-bednarz/sf-user-operation-limit-bundle": "@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "DawBed\\UserRegistrationConfirmationBundle\\": "lib"
+        }
+    }
+}

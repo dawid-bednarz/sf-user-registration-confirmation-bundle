@@ -1,0 +1,4 @@
+dawbed_context_bundle:
+   types:
+      registration: !php/const DawBed\UserRegistrationConfirmationBundle\Service\ContextFactoryService::REGISTRATION
+      confirmation_mail: !php/const DawBed\UserRegistrationConfirmationBundle\Service\ContextFactoryService::CONFIRMATION
