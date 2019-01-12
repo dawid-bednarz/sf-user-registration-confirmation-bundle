@@ -48,7 +48,7 @@ class RegistrationListener
             $this->eventDispatcher->dispatch($generateTokenEvent)
                 ->getEntityManager()
                 ->flush();
-            //  $this->entityManager->commit();
+            $this->entityManager->commit();
             $activateToken = $generateTokenEvent->getModel()->getEntity();
             $this->mailService->confirmation($user, $activateToken);
         } catch (\Throwable $exception) {

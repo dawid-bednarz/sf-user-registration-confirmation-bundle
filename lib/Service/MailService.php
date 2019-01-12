@@ -7,8 +7,6 @@ declare(strict_types=1);
 
 namespace DawBed\UserRegistrationConfirmationBundle\Service;
 
-use DawBed\OperationLimitBundle\Service\OperationLimitService;
-use DawBed\PHPOperationLimit\Model\Criteria;
 use DawBed\PHPUser\UserInterface;
 use DawBed\PHPUserActivateToken\UserActivateTokenInterface;
 use DawBed\UserRegistrationConfirmationBundle\Model\Mail\Confirmation;
@@ -32,7 +30,6 @@ class MailService
     {
         $confirmationMail = $this->container->get(Confirmation::class);
 
-        //$this->swiftMailer->send($confirmationMail->prepare($user, $activateToken));
-
+        $this->swiftMailer->send($confirmationMail->prepare($user, $activateToken));
     }
 }
