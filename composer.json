@@ -7,7 +7,7 @@
         "dawid-bednarz/sf-user-confirmation-bundle": "dev-master",
         "symfony/swiftmailer-bundle": "^3.2",
         "dawid-bednarz/sf-user-registration-bundle": "dev-master",
-        "dawid-bednarz/sf-user-operation-limit-bundle": "dev-master"
+        "dawid-bednarz/sf-operation-limit-bundle": "dev-master"
     },
     "autoload": {
         "psr-4": {
