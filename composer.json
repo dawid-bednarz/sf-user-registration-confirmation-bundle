@@ -4,10 +4,10 @@
     "type": "lib",
     "require": {
         "php": "^7.2",
-        "dawid-bednarz/sf-user-confirmation-bundle": "@dev",
+        "dawid-bednarz/sf-user-confirmation-bundle": "dev-master",
         "symfony/swiftmailer-bundle": "^3.2",
-        "dawid-bednarz/sf-user-registration-bundle": "@dev",
-        "dawid-bednarz/sf-user-operation-limit-bundle": "@dev"
+        "dawid-bednarz/sf-user-registration-bundle": "dev-master",
+        "dawid-bednarz/sf-user-operation-limit-bundle": "dev-master"
     },
     "autoload": {
         "psr-4": {
