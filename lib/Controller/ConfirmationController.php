@@ -53,6 +53,7 @@ class ConfirmationController extends AbstractController
             $refreshTokenEvent = new RefreshTokenEvent($criteria);
             $eventDispatcher->dispatch($refreshTokenEvent);
         } catch (TokenIsAlreadyConsumedException $exception) {
+            $exception->setMessage('user.is_already_active');
             return $eventDispatcher->dispatch(new ExceptionErrorEvent(Events::REFRESH_CONFIRMATION_ERROR, $exception))
                 ->getResponse();
         }

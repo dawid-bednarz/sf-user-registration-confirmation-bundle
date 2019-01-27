@@ -27,6 +27,7 @@ class RepeatType extends AbstractType
             ->add('user', EntityType::class, [
                 'class' => $this->userEntityService->User,
                 'choice_value' => 'email',
+                'label' =>  'user'
             ]);
     }
 
