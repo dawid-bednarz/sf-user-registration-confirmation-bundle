@@ -10,11 +10,11 @@ namespace DawBed\UserRegistrationConfirmationBundle\Controller;
 use DawBed\ComponentBundle\Event\Error\ExceptionErrorEvent;
 use DawBed\ComponentBundle\Event\Error\FormErrorEvent;
 use DawBed\ConfirmationBundle\EventListener\Token\TokenIsAlreadyConsumedException;
-use DawBed\UserConfirmationBundle\Event\RefreshTokenEvent;
 use DawBed\UserRegistrationConfirmationBundle\Event\Events;
 use DawBed\UserRegistrationConfirmationBundle\Event\RefreshEvent;
 use DawBed\UserRegistrationConfirmationBundle\Form\RepeatType;
 use DawBed\ComponentBundle\Service\EventDispatcher;
+use DawBed\UserRegistrationConfirmationBundle\Model\OperationLimit;
 use DawBed\UserRegistrationConfirmationBundle\Service\MailService;
 use DawBed\UserRegistrationConfirmationBundle\Service\ConfirmationService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -30,7 +30,8 @@ class ConfirmationController extends AbstractController
         EntityManagerInterface $entityManager,
         EventDispatcher $eventDispatcher,
         ConfirmationService $repeatService,
-        MailService $mailService
+        MailService $mailService,
+        OperationLimit $operationLimit
     ): Response
     {
         $form = $this->createForm(RepeatType::class, null, [
@@ -47,10 +48,11 @@ class ConfirmationController extends AbstractController
         }
 
         $user = $form->get('user')->getData();
-        $criteria = $repeatService->prepareTokenCriteria($user);
+
+        $operationLimit->canConfirmationOrException($user->getEmail());
 
         try {
-            $refreshTokenEvent = new RefreshTokenEvent($criteria);
+            $refreshTokenEvent = $repeatService->prepareTokenEvent($user);
             $eventDispatcher->dispatch($refreshTokenEvent);
         } catch (TokenIsAlreadyConsumedException $exception) {
             $exception->setMessage('user.is_already_active');
@@ -62,8 +64,7 @@ class ConfirmationController extends AbstractController
 
         $entityManager->flush();
 
-        $activateToken = $refreshTokenEvent->getModel()->getEntity();
-        $mailService->confirmation($user, $activateToken);
+        $mailService->confirmation($user, $refreshTokenEvent->getModel()->getEntity());
 
         return $response;
     }

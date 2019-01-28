@@ -9,6 +9,7 @@ namespace DawBed\UserRegistrationConfirmationBundle\Service;
 
 use DawBed\PHPUser\UserInterface;
 use DawBed\PHPUserActivateToken\Model\Criteria\CreateCriteria;
+use DawBed\UserConfirmationBundle\Event\RefreshTokenEvent;
 use DawBed\UserRegistrationConfirmationBundle\DependencyInjection\Configuration;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -29,5 +30,10 @@ class ConfirmationService
         $context = $this->contextFactoryService->build(ContextFactoryService::REGISTRATION);
 
         return new CreateCriteria(new \DateInterval($tokenExpired), $user, $context);
+    }
+
+    public function prepareTokenEvent(UserInterface $user): RefreshTokenEvent
+    {
+        return new RefreshTokenEvent($this->prepareTokenCriteria($user));
     }
 }

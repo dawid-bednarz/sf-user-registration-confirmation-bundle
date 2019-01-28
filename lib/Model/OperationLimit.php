@@ -34,7 +34,7 @@ class OperationLimit
         $this->forTime = $forTime;
     }
 
-    public function confirmation(string $name): void
+    public function canConfirmationOrException(string $name): void
     {
         $this->operationLimitService->makeByCriteria(
             (new Criteria())
