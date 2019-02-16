@@ -11,6 +11,7 @@ use DawBed\UserBundle\Service\EntityService;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class RepeatType extends AbstractType
 {
@@ -27,7 +28,10 @@ class RepeatType extends AbstractType
             ->add('user', EntityType::class, [
                 'class' => $this->userEntityService->User,
                 'choice_value' => 'email',
-                'label' =>  'user'
+                'label' =>  'user',
+                'constraints' => [
+                    new NotBlank()
+                ]
             ]);
     }
 
