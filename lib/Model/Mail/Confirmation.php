@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace DawBed\UserRegistrationConfirmationBundle\Model\Mail;
 
-use DawBed\PHPUser\UserInterface;
+use Dawbed\UserBundle\Entity\UserInterface;
 use DawBed\PHPUserActivateToken\UserActivateTokenInterface;
 use Symfony\Bundle\TwigBundle\TwigEngine;
 

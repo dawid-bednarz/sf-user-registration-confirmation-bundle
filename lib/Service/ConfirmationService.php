@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace DawBed\UserRegistrationConfirmationBundle\Service;
 
-use DawBed\PHPUser\UserInterface;
+use Dawbed\UserBundle\Entity\UserInterface;
 use DawBed\PHPUserActivateToken\Model\Criteria\CreateCriteria;
 use DawBed\UserConfirmationBundle\Event\RefreshTokenEvent;
 use DawBed\UserRegistrationConfirmationBundle\DependencyInjection\Configuration;
