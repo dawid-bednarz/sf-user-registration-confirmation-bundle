@@ -1,4 +1,8 @@
 dawbed_context_bundle:
    types:
-      registration: !php/const DawBed\UserRegistrationConfirmationBundle\Service\ContextFactoryService::REGISTRATION
-      confirmation_mail: !php/const DawBed\UserRegistrationConfirmationBundle\Service\ContextFactoryService::CONFIRMATION
+      !php/const DawBed\UserRegistrationConfirmationBundle\Enum\ContextEnum::REGISTRATION:
+         name: 'Registration'
+         groups: ['registration']
+      !php/const DawBed\UserRegistrationConfirmationBundle\Enum\ContextEnum::REGISTRATION_CONFIRMATION_MAIL:
+         name: 'Registration - send confirmation mail'
+         groups: ['registration']

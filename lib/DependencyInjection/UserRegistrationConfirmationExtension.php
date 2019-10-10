@@ -7,10 +7,10 @@ declare(strict_types=1);
 
 namespace DawBed\UserRegistrationConfirmationBundle\DependencyInjection;
 
+use DawBed\ContextBundle\Provider;
 use DawBed\OperationLimitBundle\Service\OperationLimitService;
 use DawBed\UserRegistrationConfirmationBundle\Model\Mail\Confirmation;
 use DawBed\UserRegistrationConfirmationBundle\Model\OperationLimit;
-use DawBed\UserRegistrationConfirmationBundle\Service\ContextFactoryService;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\Extension;
@@ -60,7 +60,7 @@ class UserRegistrationConfirmationExtension extends Extension implements Prepend
     private function prepareOperationLimit($config, ContainerBuilder $container)
     {
         $container->setDefinition(OperationLimit::class, new Definition(OperationLimit::class, [
-            new Reference(ContextFactoryService::class),
+            new Reference(Provider::class),
             new Reference(OperationLimitService::class),
             $config['allowed'],
             $config['on_time'],

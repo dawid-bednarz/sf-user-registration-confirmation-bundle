@@ -7,27 +7,29 @@ declare(strict_types=1);
 
 namespace DawBed\UserRegistrationConfirmationBundle\Service;
 
+use DawBed\StatusBundle\Provider;
 use Dawbed\UserBundle\Entity\UserInterface;
 use DawBed\PHPUserActivateToken\Model\Criteria\CreateCriteria;
 use DawBed\UserConfirmationBundle\Event\RefreshTokenEvent;
 use DawBed\UserRegistrationConfirmationBundle\DependencyInjection\Configuration;
+use DawBed\UserRegistrationConfirmationBundle\Enum\ContextEnum;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class ConfirmationService
 {
     private $container;
-    private $contextFactoryService;
+    private $contextProvider;
 
-    function __construct(ContainerInterface $container, ContextFactoryService $contextFactoryService)
+    function __construct(ContainerInterface $container, Provider $contextProvider)
     {
         $this->container = $container;
-        $this->contextFactoryService = $contextFactoryService;
+        $this->contextProvider = $contextProvider;
     }
 
     public function prepareTokenCriteria(UserInterface $user): CreateCriteria
     {
         $tokenExpired = $this->container->getParameter(Configuration::TOKEN_EXPIRED_TIME_NODE);
-        $context = $this->contextFactoryService->build(ContextFactoryService::REGISTRATION);
+        $context = $this->contextProvider->get(ContextEnum::REGISTRATION);
 
         return new CreateCriteria(new \DateInterval($tokenExpired), $user, $context);
     }
